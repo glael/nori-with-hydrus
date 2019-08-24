@@ -63,7 +63,7 @@ public class E621 extends DanbooruLegacy {
    */
   @Nullable
   public static String detectService(@NonNull Uri uri) {
-    final String host = uri.getHost();
+    final String host = uri.getHost() + ":" + uri.getPort();
 
     // Check hardcoded URLs.
     if ("c6ce2f20c50fbc7c67fd34489bfb95a8d2ac0de0d4a44c380f8e6a8eea336a6373e8d7c33ab1a23cd64aa62ee7b7a920d0e0245165b337924e26c65f3646641e"

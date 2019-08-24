@@ -257,6 +257,8 @@ public interface SearchClient {
           return new Flickr(context, name, endpoint);
         case FLICKR_USER:
           return new FlickrUser(context, name, endpoint);
+        case HYDRUS:
+          return new HydrusApi(context, name, endpoint, username, password);
         default:
           return null;
       }
@@ -272,7 +274,8 @@ public interface SearchClient {
       SHIMMIE,
       E621,
       FLICKR,
-      FLICKR_USER
+      FLICKR_USER,
+      HYDRUS
     }
     //endregion
   }

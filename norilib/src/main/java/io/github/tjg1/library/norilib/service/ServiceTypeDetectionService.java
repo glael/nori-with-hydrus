@@ -17,8 +17,10 @@ import io.github.tjg1.library.norilib.clients.E621;
 import io.github.tjg1.library.norilib.clients.Flickr;
 import io.github.tjg1.library.norilib.clients.FlickrUser;
 import io.github.tjg1.library.norilib.clients.Gelbooru;
+import io.github.tjg1.library.norilib.clients.HydrusApi;
 import io.github.tjg1.library.norilib.clients.SearchClient;
 import io.github.tjg1.library.norilib.clients.Shimmie;
+import io.github.tjg1.library.norilib.clients.HydrusApi;
 
 /** Service that detects the {@link io.github.tjg1.library.norilib.clients.SearchClient} API type for given URL. */
 public class ServiceTypeDetectionService extends IntentService {
@@ -98,9 +100,16 @@ public class ServiceTypeDetectionService extends IntentService {
 
     // Iterate over supported URI schemes for given URL.
     for (String uriScheme : URI_SCHEMES) {
-      final Uri baseUri = new Uri.Builder().scheme(uriScheme).authority(uri.getHost())
+      final Uri baseUri = new Uri.Builder().scheme(uriScheme).encodedAuthority(uri.getHost() + ":" + uri.getPort())
           .path(uri.getPath()).build();
       final int timeout = "https".equals(uriScheme) ? REQUEST_TIMEOUT_TLS : REQUEST_TIMEOUT;
+
+      apiEndpoint = HydrusApi.detectService(this, baseUri, timeout);
+      if (apiEndpoint != null) {
+        sendBroadcast(RESULT_OK, apiEndpoint, SearchClient.Settings.APIType.HYDRUS);
+        System.out.println(apiEndpoint);
+        return;
+      }
 
       apiEndpoint = Danbooru.detectService(this, baseUri, timeout);
       if (apiEndpoint != null) {

@@ -53,6 +53,7 @@
     <item>E621</item>
     <item>E926</item>
     <item>Flickr</item>
+    <item>Hydrus</item>
   </string-array>
   <!-- Service URLs automatically filled in when a suggested service name is picked. -->
   <string-array name="service_suggestions_uris" translatable="false">
@@ -65,5 +66,6 @@
     <item>https://e621.net</item>
     <item>https://e926.net</item>
     <item>https://api.flickr.com/</item>
+    <item>http://your.hydrus.api:45678</item>
   </string-array>
 </resources>
