@@ -195,11 +195,11 @@ public class HydrusApi implements SearchClient {
 
         String result;
         if (tags.equals("")) {
-            result = String.format(Locale.US, apiEndpoint + "/get_files/search_files?system_inbox=true&system_archive=true&Hydrus-Client-API-Access-Key=%s", apiKey);
+            result = String.format(Locale.US, apiEndpoint + "/get_files/search_files?system_inbox=false&system_archive=false&Hydrus-Client-API-Access-Key=%s", apiKey);
         }
         else {
 
-            result = String.format(Locale.US, apiEndpoint + "/get_files/search_files?system_inbox=true&system_archive=true&tags=%s&Hydrus-Client-API-Access-Key=%s", Uri.encode(new Gson().toJson(tags.split("\\s+"))), apiKey);
+            result = String.format(Locale.US, apiEndpoint + "/get_files/search_files?system_inbox=false&system_archive=false&tags=%s&Hydrus-Client-API-Access-Key=%s", Uri.encode(new Gson().toJson(tags.split("\\s+"))), apiKey);
         }
         System.out.println("Created search URL: " + result);
         return result;
